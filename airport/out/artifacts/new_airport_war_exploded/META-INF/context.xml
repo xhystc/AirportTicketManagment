@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <Resource
+            name="jndi/hibernate"
+            auth="Container"
+            factory="org.apache.naming.factory.BeanFactory"
+            type="com.mchange.v2.c3p0.ComboPooledDataSource"
+            driverClass="com.mysql.jdbc.Driver"
+            idleConnectionTestPeriod="60"
+            maxPoolSize="50"
+            minPoolSize="2"
+            acquireIncrement="2"
+            user="root"
+            password="root"
+            jdbcUrl="jdbc:mysql://localhost:3306/airport?characterEncoding=UTF-8"/>
+</Context>

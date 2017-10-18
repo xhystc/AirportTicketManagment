@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="userDao" class="com.xhystc.airport.dao.imp.UserDaoImp"/>
+    <bean id="airportDao" class="com.xhystc.airport.dao.imp.AirportDaoImp"/>
+    <bean id="airlineDao" class="com.xhystc.airport.dao.imp.AirlineDaoImp"/>
+    <bean id="ticketDao" class="com.xhystc.airport.dao.imp.TicketDaoImp"/>
+    <bean id="orderDao" class="com.xhystc.airport.dao.imp.OrderDaoImp"/>
+</beans>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <link href="css/drag_test.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+    <div id="collection" onclick="showhidden();">
+        <div draggable="true" ondragstart="dsHandle(event)" style="float: left;" id="sungou">孙狗</div>
+        <div id="hidden" hidden>
+            show
+        </div>
+    </div>
+
+    <div id="dest" style="width: 400px;height: 400px;border: 1px solid black">
+        狗头存放
+    </div>
+    <div id="search">
+        <div id="input">
+            <input type="text" id="location" name="location"  onkeyup="fbeixuan(this);" />
+        </div>
+        <div id="beixuan">
+
+        </div>
+    </div>
+    <input  id="book" name="book" title="checkbox" checked class="xixi" book="b"/><br/>
+    <button type="button" id="button" onclick="evttest(event)">test</button>
+
+    <script src="js/jquery-3.2.1.js" language="JavaScript"></script>
+
+    <script>
+        function evttest(evt,par1,par2,par3) {
+            console.log(evt);
+            console.log(par1);
+            console.log(par2);
+            console.log(par3);
+        }
+    //    $('#button').click(evttest);
+
+    </script>
+    <script>
+
+        function showhidden()
+        {
+            var div = document.getElementById("hidden");
+            if(div.hidden!=false)
+                div.hidden=false;
+            else
+                div.hidden="hidden";
+        }
+        function fbeixuan(target) {
+
+            var beixuandiv = document.getElementById('beixuan');
+            var child = beixuandiv.firstElementChild;
+
+            while(child!=null)
+            {
+                var temp = child.nextSibling;
+                beixuandiv.removeChild(child);
+                child = temp;
+            }
+
+            var array  = [];
+            var inputString = target.value;
+            if(inputString==null || inputString.trim()=="") return false;
+            console.log(inputString);
+            for(var beixuanxiang in locations)
+            {
+                if(locations[beixuanxiang].indexOf(inputString)>=0)
+                    array.push(locations[beixuanxiang]);
+            }
+            if(array.length>0)
+                beixuandiv.style.display="block";
+            for(var beixuanxiang in array)
+            {
+                var option = document.createElement("div");
+                option.innerHTML=beixuanxiang.innerHTML = array[beixuanxiang];
+                option.className="beixuanxiang";
+                option.onmouseover = function () {
+                    this.style.backgroundColor="blue";
+                    this.style.color="white";
+                }
+                option.onmouseout = function () {
+                    this.style.backgroundColor="white";
+                    this.style.fontStyle="black";
+                    this.style.color="black";
+                }
+                beixuandiv.appendChild(option);
+            }
+
+        }
+
+    </script>
+
+    <script>
+
+        var locations = ["北京南站","北京西站","北京东站","北京北站"];
+        var imgDiv = document.createElement("div");
+
+        imgDiv.hidden = "hidden";
+        imgDiv.id="sungouimgDiv";
+        document.getElementById("collection").appendChild(imgDiv);
+
+        var tu = document.createElement("img");
+        tu.src="img/sungou.jpg";
+        tu.width=50;
+        tu.id=imgDiv.id+"tu";
+        imgDiv.appendChild(tu);
+        var dest = document.getElementById("dest");
+        var dsHandle = function (event) {
+            event.dataTransfer.setData("sungouid",event.target.id);
+            console.log("sungouid:"+event.target.id);
+            var tempDiv = document.createElement("div");
+            tempDiv.style.position="absolute";
+            tempDiv.style.left="-1000px";
+            tempDiv.style.width="50px";
+            tempDiv.style.height="50px";
+            var temp = document.createElement("img");
+            temp.src="img/sungou.jpg";
+            temp.width=50;
+            document.getElementsByTagName("body")[0].appendChild(tempDiv);
+            tempDiv.appendChild(temp)
+            event.dataTransfer.setDragImage(temp,0,0);
+        }
+        dest.ondrop = function (event) {
+            var sungouid = event.dataTransfer.getData("sungouid");
+            console.log("divid:"+sungouid+"imgDiv");
+            var div = document.getElementById(sungouid+"imgDiv");
+            var collection  = document.getElementById("collection");
+            collection.removeChild(div);
+            div.style.position = "absolute";
+            div.style.left = event.pageX+"px";
+            div.style.top = event.pageY+"px";
+            div.hidden=false;
+            dest.appendChild(div);
+            var newid =  new Date().getUTCMilliseconds();
+            document.getElementById(sungouid).id = newid;
+            var imgDiv = document.createElement("div");
+
+            imgDiv.id=newid+"imgDiv";
+
+            imgDiv.hidden = "hidden";
+            document.getElementById("collection").appendChild(imgDiv);
+            var tu = document.createElement("img");
+
+            tu.src="img/sungou.jpg";
+            tu.width=50;
+            tu.id=imgDiv.id+"tu";
+            imgDiv.appendChild(tu);
+        }
+        document.ondragover = function (event) {
+            return false;
+        }
+        document.ondrop = function (event) {
+            return false;
+        }
+    </script>
+    <script>
+        var checkbox = $('#book')[0];
+        console.log('before:');
+        console.log(checkbox.getAttribute('name'));
+        console.log(checkbox.name);
+        checkbox.name='new_book';
+        console.log('after:');
+        console.log(checkbox.getAttribute('name'));
+        console.log(checkbox.name);
+
+        console.log(checkbox.getAttribute('title')===checkbox.title);
+
+        checkbox.title = 'book2';
+        console.log(checkbox.getAttribute('title')===checkbox.title);
+
+        checkbox.title = 'book3';
+        console.log(checkbox.getAttribute('title')===checkbox.title);
+
+        console.log(checkbox.getAttribute('checked')===checkbox.checked);
+
+        console.log('attr:'+checkbox.getAttribute('checked'));
+        console.log('prop:'+checkbox.checked);
+        console.log('type:'+typeof checkbox.checked);
+        console.log('type:'+typeof checkbox.getAttribute('title'));
+
+        console.log('class:'+checkbox.getAttribute('className'));
+
+        console.log('book:'+checkbox.getAttribute('book'));
+
+        console.log('type:'+checkbox.type);
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="css/bar.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="bar" class="bar">
+    <div class="baroptionwapper">
+        <div class="baroption">
+            <span class="center-text"> bar option 1 </span>
+        </div>
+        <div class="lan">
+            <div class="lanoption">
+                <span class="center-text"> lan option 1</span>
+            </div>
+            <div class="lanoption">
+                <span class="center-text"> lan option 2</span>
+            </div>
+            <div class="lanoption">
+                <span class="center-text"> lan option 3</span>
+            </div>
+        </div>
+    </div>
+    <div class="baroptionwapper">
+        <div class="baroption">
+            <span class="center-text"> bar option 2</span>
+        </div>
+        <div class="lan">
+            <div class="lanoption">
+                <span class="center-text"> lan option 4</span>
+            </div>
+            <div class="lanoption">
+                <span class="center-text"> lan option 5</span>
+            </div>
+            <div class="lanoption">
+                <span class="center-text"> lan option 6 </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="template-filter" id="template-filter" hidden>
+    <button class="delete-button" value="X">X</button>
+    <select>
+        <option value="" selected="selected">
+            choose a filter
+        </option>
+    </select>
+</div>
+<h1>Jquery Test</h1><br>
+<div id='filters' class="filters">
+</div>
+<button type="button" id="add-button">add filter</button>
+
+
+<script src="js/jquery-3.2.1.js"></script>
+<script>
+
+    var allOptions = ['1','2','3'];
+    $('.delete-button').click(
+        function () {
+            $(this).parent().remove();
+          //  console.log($('#filters').children());
+        }
+    )
+
+
+    $('#add-button').click(
+        function () {
+            if($('.filter').length>=3)
+                return false;
+            console.log('ok');
+            var $filterClone = $('#template-filter').clone(true);
+            $filterClone.removeClass().addClass('filter');
+            $filterClone.attr('id','').attr('hidden',false);
+            $filterClone.appendTo('#filters');
+            var options = getAvailableOptions();
+            for (var i in options)
+            {
+                var $option = $('<option>'+options[i]+' option'+'</option>');
+                $option.attr('value',options[i]).appendTo($filterClone.find('select'));
+            }
+
+        }
+    )
+    function getAvailableOptions() {
+        var options = [];
+        var $filters = $('.filter select');
+
+        var filters = $filters.toArray();
+        console.log('filter length:'+filters.length);
+        console.log('filter0 value:'+filters[0].value);
+        for(var i in allOptions)
+        {
+            var ok = true;
+            for(var j in filters)
+            {
+                //         console.log(filters[j].value);
+                if (filters[j].value === allOptions[i])
+                {
+                    ok=false;
+                    break;
+                }
+            }
+            if(ok)
+                options.push(allOptions[i]);
+        }
+        return options;
+    }
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
