@@ -23,7 +23,7 @@ $('#submit').click(function (evt) {
     $.post('/service/search/tickets',param,function (data) {
         console.log(data);
         if(data.result==="yes"){
-            var tickets = data.tickets;
+            var tickets = data.rows;
             for(var i in tickets){
                 var $ticketItem = $('#ticket-item-template').clone(true);
                 $ticketItem.attr('ticketId',tickets[i].id);

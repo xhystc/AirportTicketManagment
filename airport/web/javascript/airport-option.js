@@ -13,7 +13,7 @@ $('.airport-input').bind('input',function (evt) {
         $clone.addClass("airport-option");
 
         if(data.result==="yes") {
-            var airports  = data.airports;
+            var airports  = data.rows;
 
             if(airports===null || airports.length===0) {
                 $clone.text('找不到机场');

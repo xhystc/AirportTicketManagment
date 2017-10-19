@@ -1,6 +1,6 @@
 function getOrders(data) {
     if(data.result==="yes"){
-        var orders = data.orders;
+        var orders = data.rows;
         for(var i in orders){
             var $orderItem = $('#order-item-template').clone(true);
             console.log(orders[i].id);

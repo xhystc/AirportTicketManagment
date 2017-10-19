@@ -86,7 +86,7 @@ $('#mydatagrid').datagrid({
     height: 250,
     width:510,
     striped:true,
-    url: '/root/service/easyui/search/airlines',
+    url: '',
     queryParams:{
         dep:'',
         des:''
