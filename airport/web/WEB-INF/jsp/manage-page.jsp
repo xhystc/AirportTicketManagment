@@ -15,7 +15,9 @@
 </head>
 <body>
 
-<div id="mydatagrid" title="My Users" class="easyui-datagrid" flag="airline">
+<div class="airline-wapper">
+    <div id="mydatagrid" title="Airlines" class="easyui-datagrid" flag="airline"></div>
+
 </div>
 <div id="toolbar">
     <span>出发地:</span>
@@ -28,18 +30,20 @@
     <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deleteAirline()" style="width:75px">Remove</a>
 </div>
 
-<div id="ticket-panel" class="easyui-panel"  title="My Panel"
-     style="width:350px;height:220px;padding:10px;background:#fafafa;"
-     data-options="iconCls:'icon-save',closable:true,
+<div class="ticket-wapper">
+    <div id="ticket-panel" class="easyui-panel"  title="Tickets"
+         style="width:350px;height:220px;padding:10px;background:#fafafa;"
+         data-options="iconCls:'icon-save',closable:true,
     collapsible:true,minimizable:true,maximizable:true"
-     closed="true">
-    <div id="ticketdatagrid" title="My Users" class="easyui-datagrid" flag="ticket">
+         closed="true">
+        <div id="ticketdatagrid" title="My Users" class="easyui-datagrid" flag="ticket">
 
+        </div>
     </div>
 </div>
 <div id="ticket-toolbar">
-    <a href="#" class="easyui-linkbutton" iconCls="icon-create" plain="true" onclick="createTicket()" style="width:75px">New</a>
-    <a href="#" class="easyui-linkbutton" iconCls="icon-create" plain="true" onclick="" style="width:80px">Update</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="createTicket()" style="width:75px">New</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-redo" plain="true" onclick="" style="width:80px">Update</a>
     <a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deleteTicket()" style="width:85px">Remove</a>
 </div>
 
@@ -91,9 +95,7 @@
         onDblClickRow:onDbClickRow,
         onClickRow:onClickRow
     });
-    $('#dragdiv').draggable({
-        proxy:'clone'
-    });
+
 </script>
 </body>
 </html>
